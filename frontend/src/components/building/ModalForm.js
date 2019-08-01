@@ -34,16 +34,16 @@ class FormDialog extends Component {
     render() {
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                <Button variant="outlined" color="primary" onClick={ this.handleClickOpen }>
                     Add User
                 </Button>
-                <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                <Dialog open={ this.state.open } onClose={ this.handleClose } aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Add User</DialogTitle>
                     <DialogContent>
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="first-name"
+                            id="first_name"
                             label="First Name"
                             type="text"
                             fullWidth
@@ -51,13 +51,13 @@ class FormDialog extends Component {
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="last-name"
+                            id="last_name"
                             label="Last Name"
                             type="text"
                             fullWidth
                         />
                         <TextField
-                            autofocus
+                            autoFocus
                             id="email"
                             label="Email"
                             type="email"
@@ -65,7 +65,7 @@ class FormDialog extends Component {
                             fullWidth
                         />
                         <TextField
-                            autofocus
+                            autoFocus
                             id="password"
                             label="Password"
                             type="password"
@@ -74,7 +74,7 @@ class FormDialog extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={ this.handleClose } color="primary">
                             Add
                         </Button>
                     </DialogActions>

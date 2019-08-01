@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import BaseTemplate from '../BaseTemplate';
 import fetch from 'node-fetch';
+import FormDialog from  '../building/ModalForm';
 
 class WatchListView extends Component {
     constructor(props) {
@@ -36,6 +37,7 @@ class WatchListView extends Component {
                 <h1>Watch List View</h1>
                 <hr />
                 <p>{this.state.apiResponse}</p>
+                <FormDialog />
             </BaseTemplate>
         )
     }
