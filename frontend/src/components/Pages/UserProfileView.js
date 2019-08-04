@@ -8,14 +8,6 @@ import AddUserModal from '../Forms/AddUserModal';
 import DeleteUserModal from '../Forms/DeleteUserModal';
 
 const UserProfileView = () => {
-    try {
-        console.log("=========UserProfileView=========");
-        const store = sessionStorage;
-        console.log("user profile view store:", store);
-    } catch (error) {
-        console.log("UserProfileView error:", error.message);
-    }
-
     return (
         <BaseTemplate>
             <h1>User Profile View</h1>

@@ -9,34 +9,26 @@ class User {
         this.password = password;
     }
 
-    async CheckIfDuplicate() {
-        try {
-            const response = await db.one(`
-                SELECT email 
-                FROM users 
-                WHERE email = $1
-            `, [this.email]);
-            console.log("CheckIfDuplicate response:", response);
-            return response;
-        } catch (err) {
-            console.log("CheckIfDuplicate() error:", err.message);
-            return err.message;
-        }
-    }
-
     async save() {
+        const query = `
+        INSERT INTO users
+        (
+            first_name,
+            last_name,
+            email,
+            password
+        ) VALUES (
+            '${this.first_name}',
+            '${this.last_name}',
+            '${this.email}',
+            '${this.password}'
+        )`;
         try {
-            const response = await db.one(`
-                insert into users 
-                    (first_name, last_name, email, password)
-                values
-                    ($1, $2, $3, $4)
-                returning user_id
-                `, [this.first_name, this.last_name, this.email, this.password]);
-            console.log('user was created with user_id:', response.user_id);
-            return response;
+            await db.none(query);
+            console.log(`User: ${this.first_name} successfully added.`);
         } catch (err) {
-            return err.message;
+            console.log("save() error:", error.message);
+            return error.message;
         }
     }
 
@@ -47,10 +39,10 @@ class User {
                 FROM users
                 WHERE email = $1
                 `, [this.email]);
-            console.log('hash is: ', userData.password);
             return userData;
-        } catch (err) {
-            return err.message;
+        } catch (error) {
+            console.log("getUserByEmail() error:", error.message);
+            return error.message;
         }
     }
 
@@ -61,36 +53,26 @@ class User {
                 FROM users
                 WHERE user_id = $1
                 `, [this.id]);
-            console.log('hash is: ', userData.password);
             return userData;
         } catch (err) {
             return err.message;
         }
     }
 
-    async deleteUserByEmail() {
+    async deleteUserById() {
         try {
-            const deleteUser = await db.result(`
-            delete 
-            from users 
-            where email = $1
-            `, [this.email]);
-            console.log('delete this:', deleteUser.email);
-            return deleteUser;
-        } catch (err) {
-            return err.message;
+            await db.none(`
+                DELETE FROM users
+                WHERE user_id = $1`, [this.user_id]);
+            console.log(`Deleted user with id: ${this.user_id} successfully.`);
+        } catch (error) {
+            console.log("deleteUserById() error:", error.message);
+            return error.message;
         }
     }
 
-    static async getMaxUserId() {
-        try {
-            const query = `SELECT max(user_id) FROM users`;
-            const resp = await db.one(query);
-            return resp.max;
-        } catch (error) {
-            console.log("getMaxUserId() error:", error.message);
-            return error.message;
-        }
+    setUserId(user_id) {
+        this.user_id = user_id;
     }
 }
 

@@ -30,14 +30,16 @@ class AddUserModal extends Component {
 
 
     handleOpen() {
-        // e.preventDefault();
         this.setState({
-            open: true
+            open: true,
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: ''
         });
     }
 
     handleClose() {
-        // e.preventDefault();
         this.setState({
             open: false
         });
@@ -63,6 +65,7 @@ class AddUserModal extends Component {
             email: e.target.value
         })
     };
+
     handlePassword(e) {
         e.preventDefault();
         this.setState({
@@ -72,10 +75,8 @@ class AddUserModal extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-        const newInfo = this.state;
-        console.log("this is the form data:", newInfo);
 
-        const url = `http://localhost:9000/users/signup`;
+        const url = 'http://localhost:9000/users/signup';
 
         await fetch(url, {
             method: "POST",
@@ -90,79 +91,62 @@ class AddUserModal extends Component {
                 password: this.state.password
             })
         });
-
-        this.setState({
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: ''
-        });
-
-        // console.log('user signup resonse:', response);
-        // return response;
     }
 
     render() {
         return (
-
             <div>
-                <Button variant="outlined" color="primary" onClick={ this.handleOpen }>
+                <Button variant="outlined" color="primary" onClick={this.handleOpen}>
                     Add User
-                    </Button>
-                <Dialog open={ this.state.open } onClose={ this.handleClose } aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Add User</DialogTitle>
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            id="firstName"
-                            label="First Name"
-                            type="text"
-                            margin="dense"
-                            fullWidth
-                            placeholder="Satoshi"
-                            onChange={ this.handleFirstName }
-                            value={ this.state.firstName }
-                            required
-                        />
-                        <TextField
-                            id="lastName"
-                            label="Last Name"
-                            type="text"
-                            margin="dense"
-                            fullWidth
-                            placeholder="Nakamoto"
-                            onChange={ this.handleLastName }
-                            value={ this.state.lastName }
-                            required
-                        />
-                        <TextField
-                            id="email"
-                            label="Email"
-                            type="email"
-                            margin="dense"
-                            fullWidth
-                            placeholder="Satoshi@Nakamoto.com"
-                            onChange={ this.handleEmail }
-                            value={ this.state.email }
-                            required
-                        />
-                        <TextField
-                            id="password"
-                            label="Password"
-                            type="password"
-                            margin="dense"
-                            fullWidth
-                            placeholder="Bitcoin"
-                            onChange={ this.handlePassword }
-                            value={ this.state.password }
-                            required
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={ this.handleSubmit } color="primary">
-                            Add User
+                </Button>
+                <Dialog open={this.state.open} aria-labelledby="form-dialog-title">
+                    <form onSubmit={this.handleSubmit}>
+                        <DialogTitle id="form-dialog-title">Add User</DialogTitle>
+                        <DialogContent>
+                            <TextField
+                                autoFocus
+                                name="firstName"
+                                label="First Name"
+                                type="text"
+                                margin="dense"
+                                fullWidth
+                                onChange={this.handleFirstName}
+                                value={this.state.firstName}
+                            />
+                            <TextField
+                                name="lastName"
+                                label="Last Name"
+                                type="text"
+                                margin="dense"
+                                fullWidth
+                                onChange={this.handleLastName}
+                                value={this.state.lastName}
+                            />
+                            <TextField
+                                name="email"
+                                label="Email"
+                                type="email"
+                                margin="dense"
+                                fullWidth
+                                onChange={this.handleEmail}
+                                value={this.state.email}
+                            />
+                            <TextField
+                                name="password"
+                                label="Password"
+                                type="password"
+                                margin="dense"
+                                fullWidth
+                                onChange={this.handlePassword}
+                                value={this.state.password}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button type="submit" value="Submit" onClick={this.handleClose} color="primary">
+                                Add User
                             </Button>
-                    </DialogActions>
+                        </DialogActions>
+                    </form>
                 </Dialog>
             </div>
         );

@@ -19,23 +19,15 @@ import UserProfileView from './components/Pages/UserProfileView';
 // import LineGraph from './components/Charts/LineGraph';
 
 const App = () => {
-    try {
-        const store = sessionStorage;
-        store.setItem('key', 'value');
-        console.log("app level store:", store);
-    } catch (error) {
-        console.log("session storage error:", error.message);
-    }
-
     return (
         <Router>
             <CssBaseline>
                 <Switch>
-                    <Route exact path="/" component={ withRouter(BaseTemplate) } />
-                    <Route exact path="/one" component={ withRouter(MarketIndexView) } />
-                    <Route exact path="/two" component={ withRouter(WatchListView) } />
-                    <Route exact path="/three" component={ withRouter(PortfolioView) } />
-                    <Route exact path="/four" component={ withRouter(UserProfileView) } />
+                    <Route exact path="/" component={withRouter(BaseTemplate)} />
+                    <Route exact path="/one" component={withRouter(MarketIndexView)} />
+                    <Route exact path="/two" component={withRouter(WatchListView)} />
+                    <Route exact path="/three" component={withRouter(PortfolioView)} />
+                    <Route exact path="/four" component={withRouter(UserProfileView)} />
                 </Switch>
             </CssBaseline>
         </Router>

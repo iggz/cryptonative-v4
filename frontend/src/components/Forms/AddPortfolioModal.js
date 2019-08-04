@@ -30,7 +30,6 @@ class AddPortfolioModal extends Component {
     }
 
     handleClose() {
-
         this.setState({
             open: false
         });
@@ -88,7 +87,7 @@ class AddPortfolioModal extends Component {
                         <DialogActions>
                             <Button type="submit" onClick={this.handleClose} color="primary">
                                 Add Portfolio
-                        </Button>
+                            </Button>
                         </DialogActions>
                     </form>
                 </Dialog>
